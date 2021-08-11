@@ -27,7 +27,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
                         .class("profile_pic"),
                         .src(Path("https://avatars.githubusercontent.com/u/16567811?v=4"))
                     ),
-                    .h1(.text(index.title)),
+                    .h1(.text("JuSeok's Blog!")),
                     .p(
                         .class("description"),
                         .text(context.site.description)
@@ -57,7 +57,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
                         .class("profile_pic"),
                         .src(Path("https://avatars.githubusercontent.com/u/16567811?v=4"))
                     ),
-                    .h1(.text("Welcome to Mojito's Blog!")),
+                    .h1(.text("JuSeok's Blog!")),
                     .p(
                         .class("description"),
                         .text(context.site.description)

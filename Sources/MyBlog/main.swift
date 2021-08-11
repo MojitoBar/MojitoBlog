@@ -16,7 +16,7 @@ struct MyBlog: Website {
 
     // Update these properties to configure your website:
     var url = URL(string: "https://your-website-url.com")!
-    var name = "Mojito's Blog"
+    var name = "JuSeok's Blog"
     var description = "Swift & iOS Technical Blog"
     var language: Language { .korean }
     var favicon: Favicon = Favicon()
