@@ -150,7 +150,6 @@ a {
 .item-list p {
     white-space: normal;
     line-height: 1.2;
-    text-align: left;
     word-wrap: break-word;
     display: -webkit-box;
     -webkit-line-clamp: 4;
