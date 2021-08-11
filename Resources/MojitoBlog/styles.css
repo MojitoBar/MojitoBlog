@@ -8,6 +8,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
+    font-weight: 100;
 }
 
 body {
@@ -18,7 +20,14 @@ body {
 }
 
 .wrapper {
-    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px;
+    text-align: left;
+}
+
+.contents {
+    width: 900px;
     margin-left: auto;
     margin-right: auto;
     padding: 40px;
@@ -26,13 +35,14 @@ body {
 }
 
 header {
-    background-color: #eee;
+    
 }
 
 header .wrapper {
     padding-top: 30px;
     padding-bottom: 30px;
     text-align: center;
+    background-color: #023279;
 }
 
 header a {
@@ -41,12 +51,13 @@ header a {
 
 header .site-name {
     font-size: 2em;
-    color: #000;
+    color: #ececec;
     font-weight: bold;
 }
 
 nav {
     margin-top: 20px;
+    background-color: #fff;
 }
 
 nav li {
@@ -55,8 +66,12 @@ nav li {
     line-height: 1.5em;
 }
 
+nav ul {
+    text-align: right;
+}
+
 nav li a.selected {
-    text-decoration: underline;
+/*    text-decoration: underline;*/
 }
 
 h1 {
@@ -74,17 +89,20 @@ p {
 
 a {
     color: inherit;
+    text-decoration: blink;
 }
 
 .description {
     margin-bottom: 40px;
 }
 
+
+
 .item-list > li {
     display: block;
     padding: 20px;
     border-radius: 20px;
-    background-color: #eee;
+    background-color: #fff;
     margin-bottom: 20px;
 }
 
@@ -99,20 +117,31 @@ a {
 
 .item-list p {
     margin-bottom: 0;
+    color: gray;
 }
 
 .tag-list {
-    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-left: -5px;
+}
+
+.profile_pic{
+    float: left;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    margin-right: 1.5em;
 }
 
 .tag-list li,
 .tag {
     display: inline-block;
-    background-color: #000;
-    color: #ddd;
-    padding: 4px 6px;
-    border-radius: 5px;
-    margin-right: 5px;
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-right: 10px;
+    font-size: 13px;
+    box-shadow: 0px 2px 3px 0px #b9b9b9;
 }
 
 .tag-list a,
@@ -143,22 +172,40 @@ footer {
     color: #8a8a8a;
 }
 
+footer p {
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.github, .linkedin{
+    width: 25px;
+    height: 25px;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #222;
+        background-color: #fff;
     }
 
-    body,
-    header .site-name {
-        color: #ddd;
+/*    body,*/
+/*    header .site-name {*/
+/*        color: #ddd;*/
+/*    }*/
+
+    header,
+    .site-name{
+    }
+
+    .h1 {
+        color: #333;
     }
 
     .item-list > li {
-        background-color: #333;
+        background-color: #fff;
+        box-shadow: 0px 0px 20px 0px #dadada;
     }
 
     header {
-        background-color: #000;
     }
 }
 

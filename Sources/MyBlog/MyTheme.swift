@@ -22,13 +22,16 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             .head(for: index, on: context.site),
             .body(
                 .header(for: context, selectedSection: nil),
-                .wrapper(
+                .contents(
+                    .img(
+                        .class("profile_pic"),
+                        .src(Path("https://avatars.githubusercontent.com/u/16567811?v=4"))
+                    ),
                     .h1(.text(index.title)),
                     .p(
                         .class("description"),
                         .text(context.site.description)
                     ),
-                    .h2("Latest content"),
                     .itemList(
                         for: context.allItems(
                             sortedBy: \.date,
@@ -49,7 +52,16 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             .head(for: section, on: context.site),
             .body(
                 .header(for: context, selectedSection: section.id),
-                .wrapper(
+                .contents(
+                    .img(
+                        .class("profile_pic"),
+                        .src(Path("https://avatars.githubusercontent.com/u/16567811?v=4"))
+                    ),
+                    .h1(.text("Welcome to Mojito's Blog!")),
+                    .p(
+                        .class("description"),
+                        .text(context.site.description)
+                    ),
                     .h1(.text(section.title)),
                     .itemList(for: section.items, on: context.site)
                 ),
@@ -68,7 +80,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             .body(
                 .class("item-page"),
                 .header(for: context, selectedSection: item.sectionID),
-                .wrapper(
+                .contents(
                     .article(
                         .div(
                             .class("content"),
@@ -103,7 +115,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             .head(for: page, on: context.site),
             .body(
                 .header(for: context, selectedSection: nil),
-                .wrapper(
+                .contents(
                     .h1("Browse all tags"),
                     .ul(
                         .class("all-tags"),
@@ -130,7 +142,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             .head(for: page, on: context.site),
             .body(
                 .header(for: context, selectedSection: nil),
-                .wrapper(
+                .contents(
                     .h1(
                         "Tagged with ",
                         .span(.class("tag"), .text(page.tag.string))
@@ -159,26 +171,39 @@ private extension Node where Context == HTML.BodyContext {
     static func wrapper(_ nodes: Node...) -> Node {
         .div(.class("wrapper"), .group(nodes))
     }
+    
+    static func contents(_ nodes: Node...) -> Node {
+        .div(.class("contents"), .group(nodes))
+    }
 
-    static func header<T: Website>(
-        for context: PublishingContext<T>,
-        selectedSection: T.SectionID?
-    ) -> Node {
+    static func header<T: Website>( for context: PublishingContext<T>, selectedSection: T.SectionID?) -> Node {
         let sectionIDs = T.SectionID.allCases
-
         return .header(
             .wrapper(
-                .a(.class("site-name"), .href("/"), .text(context.site.name)),
-                .if(sectionIDs.count > 1,
-                    .nav(
-                        .ul(.forEach(sectionIDs) { section in
-                            .li(.a(
-                                .class(section == selectedSection ? "selected" : ""),
-                                .href(context.sections[section].path),
-                                .text(context.sections[section].title)
-                            ))
-                        })
+                .a(
+                    .href("https://github.com/MojitoBar"),
+                    .img(
+                        .class("github"),
+                        .src(Path("images/github.png"))
                     )
+                ),
+                .a(
+                    .href("https://www.linkedin.com/in/%EB%8F%99%EC%84%9D-%EC%A3%BC-a70903204/"),
+                    .img(
+                        .class("linkedin"),
+                        .src(Path("images/linkedin.png"))
+                    )
+                )
+            ),
+            .if(sectionIDs.count > 1,
+                .nav(
+                    .ul(.forEach(sectionIDs) { section in
+                        .li(.a(
+                            .class(section == selectedSection ? "selected" : ""),
+                            .href(context.sections[section].path),
+                            .text(context.sections[section].title)
+                        ))
+                    })
                 )
             )
         )
@@ -193,8 +218,8 @@ private extension Node where Context == HTML.BodyContext {
                         .href(item.path),
                         .text(item.title)
                     )),
-                    .tagList(for: item, on: site),
-                    .p(.text(item.description))
+                    .p(.text(item.description)),
+                    .tagList(for: item, on: site)
                 ))
             }
         )
@@ -212,6 +237,11 @@ private extension Node where Context == HTML.BodyContext {
     static func footer<T: Website>(for site: T) -> Node {
         return .footer(
             .p(
+                .a(
+                    .text("©JuSeok "),
+                    .href("https://github.com/MojitoBar")
+                ),
+                    
                 .text("Generated using "),
                 .a(
                     .text("Publish"),
