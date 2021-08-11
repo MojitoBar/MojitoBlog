@@ -104,6 +104,10 @@ a {
     border-radius: 20px;
     background-color: #fff;
     margin-bottom: 20px;
+    box-shadow: 0px 0px 20px 0px #dadada;
+}
+.item-list > li {
+    background-color: #fff;
 }
 
 .item-list > li:last-child {
