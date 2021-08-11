@@ -1,5 +1,6 @@
 import Plot
 import Publish
+import Foundation
 
 public extension Theme {
     /// The default "Foundation" theme that Publish ships with, a very
@@ -27,10 +28,15 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
                         .class("profile_pic"),
                         .src(Path("https://avatars.githubusercontent.com/u/16567811?v=4"))
                     ),
-                    .h1(.text("JuSeok's Blog!")),
-                    .p(
-                        .class("description"),
-                        .text(context.site.description)
+                    .div(
+                        .a(
+                            .href("/"),
+                            .h1(.text("JuSeok's Blog!"))
+                        ),
+                        .p(
+                            .class("description"),
+                            .text(context.site.description)
+                        )
                     ),
                     .itemList(
                         for: context.allItems(
@@ -53,14 +59,22 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             .body(
                 .header(for: context, selectedSection: section.id),
                 .contents(
-                    .img(
-                        .class("profile_pic"),
-                        .src(Path("https://avatars.githubusercontent.com/u/16567811?v=4"))
-                    ),
-                    .h1(.text("JuSeok's Blog!")),
-                    .p(
-                        .class("description"),
-                        .text(context.site.description)
+                    .div(
+                        .class("flex_div"),
+                        .img(
+                            .class("profile_pic"),
+                            .src(Path("https://avatars.githubusercontent.com/u/16567811?v=4"))
+                        ),
+                        .div(
+                            .a(
+                                .href("/"),
+                                .h1(.text("JuSeok's Blog!"))
+                            ),
+                            .p(
+                                .class("description"),
+                                .text(context.site.description)
+                            )
+                        )
                     ),
                     .h1(.text(section.title)),
                     .itemList(for: section.items, on: context.site)
@@ -76,7 +90,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             .lang(context.site.language),
             .head(for: item,
                   on: context.site,
-                  stylesheetPaths: ["/styles.css", "/sundellsColors.css"]),
+                  stylesheetPaths: ["/styles.css"]),
             .body(
                 .class("item-page"),
                 .header(for: context, selectedSection: item.sectionID),
@@ -199,7 +213,7 @@ private extension Node where Context == HTML.BodyContext {
                 .nav(
                     .ul(.forEach(sectionIDs) { section in
                         .li(.a(
-                            .class(section == selectedSection ? "selected" : ""),
+                            .class("taglist"),
                             .href(context.sections[section].path),
                             .text(context.sections[section].title)
                         ))
@@ -216,22 +230,29 @@ private extension Node where Context == HTML.BodyContext {
                 .li(.article(
                     .h1(.a(
                         .href(item.path),
-                        .text(item.title)
+                        .text(item.description)
                     )),
-                    .p(.text(item.description)),
-                    .tagList(for: item, on: site)
+                    .p(.text(item.body.html.htmlEscaped)),
+                    .tagList(for: item, on: site),
+                    .p(
+                        .class("date"),
+                        .text("| " + item.date.description.substring(from: 0, to: 19))
+                    )
                 ))
             }
         )
     }
 
     static func tagList<T: Website>(for item: Item<T>, on site: T) -> Node {
-        return .ul(.class("tag-list"), .forEach(item.tags) { tag in
-            .li(.a(
-                .href(site.path(for: tag)),
-                .text(tag.string)
-            ))
-        })
+        return .ul(
+            .class("tag-list"),
+            .forEach(item.tags) { tag in
+                .li(.a(
+                    .href(site.path(for: tag)),
+                    .text(tag.string)
+                ))
+            }
+        )
     }
 
     static func footer<T: Website>(for site: T) -> Node {
@@ -253,5 +274,43 @@ private extension Node where Context == HTML.BodyContext {
                 .href("/feed.rss")
             ))
         )
+    }
+}
+
+extension String {
+    func substring(from: Int, to: Int) -> String {
+        guard from < count, to >= 0, to - from >= 0 else {
+            return ""
+        }
+        
+        // Index 값 획득
+        let startIndex = index(self.startIndex, offsetBy: from)
+        let endIndex = index(self.startIndex, offsetBy: to + 1) // '+1'이 있는 이유: endIndex는 문자열의 마지막 그 다음을 가리키기 때문
+        
+        // 파싱
+        return String(self[startIndex ..< endIndex])
+    }
+}
+
+extension String {
+    // html 태그 제거 + html entity들 디코딩.
+    var htmlEscaped: String {
+        guard let encodedData = self.data(using: .utf8) else {
+            return self
+        }
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        do {
+            let attributed = try NSAttributedString(data: encodedData,
+                                                    options: options,
+                                                    documentAttributes: nil)
+            return attributed.string
+        } catch {
+            return self
+        }
     }
 }
