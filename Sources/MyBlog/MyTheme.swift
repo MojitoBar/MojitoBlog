@@ -214,7 +214,13 @@ private extension Node where Context == HTML.BodyContext {
             ),
             .if(sectionIDs.count > 1,
                 .nav(
-                    .ul(.forEach(sectionIDs) { section in
+                    .ul(
+                        .li(.a(
+                            .class("taglist"),
+                            .href("/"),
+                            .text("All")
+                        )),
+                        .forEach(sectionIDs) { section in
                         .li(.a(
                             .class("taglist"),
                             .href(context.sections[section].path),
