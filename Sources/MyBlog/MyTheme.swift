@@ -50,7 +50,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             )
         )
     }
-
+    
     func makeSectionHTML(for section: Section<Site>,
                          context: PublishingContext<Site>) throws -> HTML {
         HTML(
@@ -83,7 +83,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             )
         )
     }
-
+    
     func makeItemHTML(for item: Item<Site>,
                       context: PublishingContext<Site>) throws -> HTML {
         HTML(
@@ -108,7 +108,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             )
         )
     }
-
+    
     func makePageHTML(for page: Page,
                       context: PublishingContext<Site>) throws -> HTML {
         HTML(
@@ -121,7 +121,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             )
         )
     }
-
+    
     func makeTagListHTML(for page: TagListPage,
                          context: PublishingContext<Site>) throws -> HTML? {
         HTML(
@@ -148,7 +148,7 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
             )
         )
     }
-
+    
     func makeTagDetailsHTML(for page: TagDetailsPage,
                             context: PublishingContext<Site>) throws -> HTML? {
         HTML(
@@ -189,7 +189,7 @@ private extension Node where Context == HTML.BodyContext {
     static func contents(_ nodes: Node...) -> Node {
         .div(.class("contents"), .group(nodes))
     }
-
+    
     static func header<T: Website>( for context: PublishingContext<T>, selectedSection: T.SectionID?) -> Node {
         let sectionIDs = T.SectionID.allCases
         return .header(
@@ -222,7 +222,7 @@ private extension Node where Context == HTML.BodyContext {
             )
         )
     }
-
+    
     static func itemList<T: Website>(for items: [Item<T>], on site: T) -> Node {
         return .ul(
             .class("item-list"),
@@ -232,7 +232,7 @@ private extension Node where Context == HTML.BodyContext {
                         .href(item.path),
                         .text(item.description)
                     )),
-                    .p(.text(item.body.html.htmlEscaped)),
+                    .p(.text(item.body.html.html2String)),
                     .tagList(for: item, on: site),
                     .p(
                         .class("date"),
@@ -242,7 +242,7 @@ private extension Node where Context == HTML.BodyContext {
             }
         )
     }
-
+    
     static func tagList<T: Website>(for item: Item<T>, on site: T) -> Node {
         return .ul(
             .class("tag-list"),
@@ -254,7 +254,7 @@ private extension Node where Context == HTML.BodyContext {
             }
         )
     }
-
+    
     static func footer<T: Website>(for site: T) -> Node {
         return .footer(
             .p(
@@ -262,7 +262,7 @@ private extension Node where Context == HTML.BodyContext {
                     .text("©JuSeok "),
                     .href("https://github.com/MojitoBar")
                 ),
-                    
+                
                 .text("Generated using "),
                 .a(
                     .text("Publish"),
@@ -292,25 +292,23 @@ extension String {
     }
 }
 
-extension String {
-    // html 태그 제거 + html entity들 디코딩.
-    var htmlEscaped: String {
-        guard let encodedData = self.data(using: .utf8) else {
-            return self
-        }
-        
-        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
-            .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: String.Encoding.utf8.rawValue
-        ]
-        
+extension Data {
+    var html2AttributedString: NSAttributedString? {
         do {
-            let attributed = try NSAttributedString(data: encodedData,
-                                                    options: options,
-                                                    documentAttributes: nil)
-            return attributed.string
+            return try NSAttributedString(data: self, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
         } catch {
-            return self
+            print("error:", error)
+            return  nil
         }
+    }
+    var html2String: String { html2AttributedString?.string ?? "" }
+}
+
+extension StringProtocol {
+    var html2AttributedString: NSAttributedString? {
+        Data(utf8).html2AttributedString
+    }
+    var html2String: String {
+        html2AttributedString?.string ?? ""
     }
 }
