@@ -1,7 +1,7 @@
 import Foundation
 import Publish
 import Plot
-
+import SplashPublishPlugin
 // This type acts as the configuration for your website.
 struct MyBlog: Website {
     enum SectionID: String, WebsiteSectionID {
@@ -24,4 +24,4 @@ struct MyBlog: Website {
 }
 
 // This will generate your website using the built-in Foundation theme:
-try MyBlog().publish(withTheme: .MyTheme)
+try MyBlog().publish(withTheme: .MyTheme, plugins: [.splash(withClassPrefix: "hljs-")])

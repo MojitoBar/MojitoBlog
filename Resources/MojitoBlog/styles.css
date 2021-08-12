@@ -1,28 +1,36 @@
 /**
-*  Publish Foundation theme
-*  Copyright (c) John Sundell 2019
-*  MIT license, see LICENSE file for details
-*/
-
-@font-face {
-    font-family: 'BMJUA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'NanumSquareRound';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
+ *  Publish Foundation theme
+ *  Copyright (c) John Sundell 2019
+ *  MIT license, see LICENSE file for details
+ */
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BBTreeGB';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -43,7 +51,20 @@ body {
     text-align: left;
 }
 
+.wrapper .homelink{
+    color: #fff;
+    font-weight: bold;
+    float: left;
+    font-size: 1.7em;
+    font-family: BBTreeGB;
+}
+
+.wrapper .homelink p {
+    line-height: 0.5em;
+}
+
 .wrapper a {
+    float: right;
     margin: 0 7px;
 }
 
@@ -56,13 +77,23 @@ body {
     text-align: left;
 }
 
+.contents h1{
+    font-family: "BBTreeGB";
+    font-size: 30px;
+}
+
+.contents h2{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
 header {
     
 }
 
 header .wrapper {
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 35px;
     text-align: right;
     background-color: #F5DF4D;
 }
@@ -87,6 +118,8 @@ nav li {
     display: inline-block;
     margin: 0 7px;
     line-height: 1.5em;
+    margin-left: 20px;
+    margin-top: 5px;
 }
 
 nav ul {
@@ -94,7 +127,7 @@ nav ul {
 }
 
 nav li a.selected {
-/*    text-decoration: underline;*/
+    /*    text-decoration: underline;*/
 }
 
 h1 {
@@ -116,6 +149,15 @@ a {
     text-decoration: blink;
 }
 
+li b {
+    padding: 3px 6px;
+    background-color: #d8d8d8;
+    color: #5a5a5a;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: "BBTreeGB";
+}
+
 .description {
     margin-bottom: 40px;
 }
@@ -127,12 +169,12 @@ a {
 .item-list > li {
     display: block;
     padding: 20px;
-/*    border-radius: 20px;*/
+    /*    border-radius: 20px;*/
     background-color: #fff;
     margin-bottom: 20px;
-/*    border-bottom: 2px solid #939597;*/
-/*    box-shadow: 0px 0px 20px 0px #dadada;*/
-        border-bottom: 1px solid #93959738;
+    /*    border-bottom: 2px solid #939597;*/
+    /*    box-shadow: 0px 0px 20px 0px #dadada;*/
+    border-bottom: 1px solid #93959738;
 }
 .item-list > li {
     background-color: #fff;
@@ -173,6 +215,10 @@ a {
     margin-right: 1.5em;
 }
 
+article .tag-list li{
+    margin-left: 10px;
+}
+
 .tag-list li,
 .tag {
     display: inline-block;
@@ -210,6 +256,13 @@ a {
 
 footer {
     color: #8a8a8a;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.footer-tags{
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
 }
 
 footer p {
@@ -232,31 +285,60 @@ article h1{
     text-align: right;
 }
 
+.item-page h2{
+    margin-bottom: 10px;
+}
+
+.item-page li{
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+.item-page .contents p a{
+    font-size: 14.5px;
+    color: #4444ff;
+    font-family: "BBTreeGB";
+}
+
+.item-page p{
+    line-height: 1.5em;
+    padding: 5px;
+    margin-bottom: 0px;
+}
+
+.item-page ol{
+    padding: 5px;
+}
+
+.item-page h3{
+    margin-top: 10px;
+}
+
 @media (prefers-color-scheme: dark) {
     body {
         background-color: #fff;
     }
-
-/*    body,*/
-/*    header .site-name {*/
-/*        color: #ddd;*/
-/*    }*/
-
+    
+    /*    body,*/
+    /*    header .site-name {*/
+    /*        color: #ddd;*/
+    /*    }*/
+    
     header,
     .site-name{
     }
-
+    
     .h1 {
         color: #333;
     }
-
+    
     .item-list > li {
         background-color: #fff;
-/*        border-bottom: 2px solid #939597;*/
-/*        box-shadow: 0px 0px 20px 0px #dadada;*/
+        /*        border-bottom: 2px solid #939597;*/
+        /*        box-shadow: 0px 0px 20px 0px #dadada;*/
         border-bottom: 1px solid #93959738;
     }
-
+    
     header {
     }
 }
@@ -277,4 +359,69 @@ article h1{
     a{
         font-size: 0.8em;
     }
+}
+
+
+pre {
+    margin-bottom: 1.5em;
+    background-color: #1a1a1a;
+    padding: 16px 0;
+    border-radius: 16px;
+    margin-top: 1em;
+}
+
+pre code {
+    font-family: 'Pretendard-Regular', sans-serif;
+    display: block;
+    padding: 0 20px;
+    color: #a9bcbc;
+    line-height: 1.4em;
+    font-size: 0.95em;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+    letter-spacing: 0.05em;
+}
+
+pre code .hljs-keyword {
+    color: #e73289;
+}
+
+pre code .hljs-type {
+    color: #8281ca;
+}
+
+pre code .hljs-call {
+    color: #348fe5;
+}
+
+pre code .hljs-property {
+    color: #21ab9d;
+}
+
+pre code .hljs-number {
+    color: #db6f57;
+}
+
+pre code .hljs-string {
+    color: #fa641e;
+}
+
+pre code .hljs-comment {
+    color: #6b8a94;
+}
+
+pre code .hljs-dotAccess {
+    color: #92b300;
+}
+
+pre code .hljs-preprocessing {
+    color: #b68a00;
+}
+
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
 }

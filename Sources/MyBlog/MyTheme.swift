@@ -93,14 +93,17 @@ private struct MyThemeHTMLFactory<Site: Website>: HTMLFactory {
                   stylesheetPaths: ["/styles.css"]),
             .body(
                 .class("item-page"),
-                .header(for: context, selectedSection: item.sectionID),
+                .itemHeader(for: context, selectedSection: item.sectionID),
                 .contents(
                     .article(
                         .div(
                             .class("content"),
+                            .h1(.text(item.title)),
                             .contentBody(item.body)
                         ),
-                        .span("Tagged with: "),
+                        .h1(
+                            .class("footer-tags"),
+                            .text("Tags")),
                         .tagList(for: item, on: context.site)
                     )
                 ),
@@ -223,6 +226,44 @@ private extension Node where Context == HTML.BodyContext {
         )
     }
     
+    static func itemHeader<T: Website>( for context: PublishingContext<T>, selectedSection: T.SectionID?) -> Node {
+        let sectionIDs = T.SectionID.allCases
+        return .header(
+            .wrapper(
+                .a(
+                    .class("homelink"),
+                    .href("/"),
+                    .p("JuSeok")
+                ),
+                .a(
+                    .href("https://github.com/MojitoBar"),
+                    .img(
+                        .class("github"),
+                        .src(Path("images/github.png"))
+                    )
+                ),
+                .a(
+                    .href("https://www.linkedin.com/in/%EB%8F%99%EC%84%9D-%EC%A3%BC-a70903204/"),
+                    .img(
+                        .class("linkedin"),
+                        .src(Path("images/linkedin.png"))
+                    )
+                )
+            ),
+            .if(sectionIDs.count > 1,
+                .nav(
+                    .ul(.forEach(sectionIDs) { section in
+                        .li(.a(
+                            .class("taglist"),
+                            .href(context.sections[section].path),
+                            .text(context.sections[section].title)
+                        ))
+                    })
+                )
+            )
+        )
+    }
+    
     static func itemList<T: Website>(for items: [Item<T>], on site: T) -> Node {
         return .ul(
             .class("item-list"),
@@ -232,7 +273,7 @@ private extension Node where Context == HTML.BodyContext {
                         .href(item.path),
                         .text(item.description)
                     )),
-                    .p(.text(item.body.html.html2String)),
+                    .p(.text(item.body.html.htmlToString(str: item.body.html))),
                     .tagList(for: item, on: site),
                     .p(
                         .class("date"),
@@ -290,25 +331,53 @@ extension String {
         // 파싱
         return String(self[startIndex ..< endIndex])
     }
-}
-
-extension Data {
-    var html2AttributedString: NSAttributedString? {
-        do {
-            return try NSAttributedString(data: self, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-        } catch {
-            print("error:", error)
-            return  nil
+    
+    func htmlToString(str: String) -> String{
+        var answer = ""
+        var testDisassemble: [Character] = []
+        if str.count <= 500 {
+            for i in 0 ..< str.count {
+                testDisassemble.append(str[str.index(str.startIndex, offsetBy: i)])
+            }
         }
-    }
-    var html2String: String { html2AttributedString?.string ?? "" }
-}
-
-extension StringProtocol {
-    var html2AttributedString: NSAttributedString? {
-        Data(utf8).html2AttributedString
-    }
-    var html2String: String {
-        html2AttributedString?.string ?? ""
+        else{
+            for i in 0 ..< 500 {
+                testDisassemble.append(str[str.index(str.startIndex, offsetBy: i)])
+            }
+        }
+        
+        var check = false
+        
+        if str.count <= 500 {
+            for j in 0 ..< testDisassemble.count{
+                if testDisassemble[j] == "<" {
+                    check = true
+                }
+                if testDisassemble[j] == ">"{
+                    testDisassemble[j] = " "
+                    check = false
+                }
+                if check{
+                    testDisassemble[j] = " "
+                }
+            }
+        }
+        else{
+            for j in 0 ..< 500{
+                if testDisassemble[j] == "<" {
+                    check = true
+                }
+                if testDisassemble[j] == ">"{
+                    testDisassemble[j] = " "
+                    check = false
+                }
+                if check{
+                    testDisassemble[j] = " "
+                }
+            }
+        }
+        
+        answer = String(testDisassemble)
+        return answer
     }
 }
