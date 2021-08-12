@@ -255,18 +255,7 @@ private extension Node where Context == HTML.BodyContext {
                         .src(Path("images/linkedin.png"))
                     )
                 )
-            ),
-            .if(sectionIDs.count > 1,
-                .nav(
-                    .ul(.forEach(sectionIDs) { section in
-                        .li(.a(
-                            .class("taglist"),
-                            .href(context.sections[section].path),
-                            .text(context.sections[section].title)
-                        ))
-                    })
-                )
-            )
+            )            
         )
     }
     
