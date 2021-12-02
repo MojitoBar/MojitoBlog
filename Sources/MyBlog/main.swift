@@ -6,6 +6,7 @@ import SplashPublishPlugin
 struct MyBlog: Website {
     enum SectionID: String, WebsiteSectionID {
         // Add the sections that you want your website to contain here:
+        case ios
         case algorithm
         case old
     }
