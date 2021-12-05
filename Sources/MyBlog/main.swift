@@ -16,7 +16,7 @@ struct MyBlog: Website {
     }
 
     // Update these properties to configure your website:
-    var url = URL(string: "https://juseok.xyz/images")!
+    var url = URL(string: "https://juseok.xyz")!
     var name = "JuSeok's Blog"
     var description = "Swift & iOS Technical Blog"
     var language: Language { .korean }
