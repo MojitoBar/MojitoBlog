@@ -44,6 +44,15 @@ body {
     text-align: center;
 }
 
+.item-page .wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    width: 100%;
+    position: fixed;
+    height: 3.5%;
+}
+
 .wrapper {
     margin-left: auto;
     margin-right: auto;
@@ -285,6 +294,10 @@ article h1{
     margin-top: 0px;
 }
 
+.item-page article{
+    margin-top: 60px;
+}
+
 .date{
     margin-top: 23px;
     font-size: 13px;
@@ -318,9 +331,10 @@ article h1{
 
 .item-page h3{
     margin-top: 10px;
-        font-size: 16px;
-        font-family: auto;
-        font-weight: 350;
+    font-size: 16px;
+    font-family: auto;
+    font-weight: 350;
+    line-height: 1.7;
 }
 
 @media (prefers-color-scheme: dark) {
