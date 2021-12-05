@@ -95,7 +95,7 @@ header .wrapper {
     padding-top: 15px;
     padding-bottom: 35px;
     text-align: right;
-    background-color: #F5DF4D;
+    background-color: #4d79f5;
 }
 
 header a {
@@ -318,6 +318,9 @@ article h1{
 
 .item-page h3{
     margin-top: 10px;
+        font-size: 16px;
+        font-family: auto;
+        font-weight: 350;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -372,7 +375,7 @@ pre {
     margin-bottom: 1.5em;
     background-color: #1a1a1a;
     padding: 16px 0;
-    border-radius: 16px;
+    border-radius: 8px;
     margin-top: 1em;
 }
 
@@ -430,4 +433,41 @@ pre code.hljs {
   display: block;
   overflow-x: auto;
   padding: 1em;
+}
+
+blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 10px;
+    padding-bottom: 0;
+    padding-left: calc(0.8125rem - 1px);
+    padding-right: 0;
+    padding-top: 0;
+    margin-bottom: 0.8125rem;
+    border-left: 4px solid hsla(0,0%,0%,0.13);
+    color: hsla(0,0%,0%,0.53);
+}
+
+div.content ul{
+    margin-top: 25px;
+    margin-left: 20px;
+}
+
+div.content ul li{
+    margin-bottom: 15px;
+    color: #007cff;
+}
+
+.bold{
+    padding-left: 4px;
+    padding-right: 4px;
+    background-color: #aed2ff;
+    border-radius: 4px;
+    color: #001999;
+}
+.heavy{
+    
+}
+.inyong{
+    margin-top:
 }
