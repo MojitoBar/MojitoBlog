@@ -491,3 +491,7 @@ div.content ul li{
     font-size: 16px;
     text-decoration: underline;
 }
+
+img{
+    width: 100%;
+}
