@@ -294,6 +294,9 @@ private extension Node where Context == HTML.BodyContext {
     static func footer<T: Website>(for site: T) -> Node {
         return .footer(
             .p(
+                .text("wnehdtjr5@gmail.com")
+            ),
+            .p(
                 .a(
                     .text("©JuSeok "),
                     .href("https://github.com/MojitoBar")
