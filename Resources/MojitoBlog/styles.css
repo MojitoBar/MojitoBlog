@@ -467,7 +467,7 @@ div.content ul{
     margin-left: 20px;
 }
 
-div.content ul li{
+div.content ul li a{
     margin-bottom: 15px;
     color: #007cff;
 }
