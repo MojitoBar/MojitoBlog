@@ -49,7 +49,7 @@ imageView.bounds.origin.y = 70
 <br/>
 <img src="/images/frameImage.png"/>
 
-<blockquote><b class="inyong">상위 뷰의 좌표계에서 뷰의 위치와 크기를 설명하는 프레임 사각형.</b></blockquote>
+<blockquote><b class="inyong">상위 뷰의 좌표계에서 뷰의 위치와 크기를 설명하는 프레임 사각형.</b></blockquote>
 
 ### 마찬가지로 애플의 개발자 문서를 참고하면 위와 같이 정의되어 있다.
 <br/>
