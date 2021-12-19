@@ -29,7 +29,7 @@ tags: iOS, Swift
 ### <b class="heavy">Xcode - Capabilities - Background Modes</b>에서 Background 상태에서 이벤트를 처리할 수 있도록 지원해준다.
 
 <br/>
-<img src="/images/appstateImage.png"/>
+<img src="/images/backgroundmodeImage.png"/>
 <br/>
 
 ### 위 사진에 포함된 기능 중 몇 가지 설명해보면
