@@ -463,8 +463,14 @@ blockquote {
 }
 
 div.content ul{
-    margin-top: 25px;
     margin-left: 20px;
+    line-height: 1.7;
+}
+
+div.content li{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    line-height: 1.7;
 }
 
 div.content ul li a{
