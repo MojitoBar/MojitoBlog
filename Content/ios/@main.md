@@ -37,7 +37,7 @@ autoreleasepool {
 ### UIApplicationMain의 역할은 4가지 정도가 있다.
 - 먼저 앱의 본체에 해당하는 객체인 <b class="heavy">UIApplication객체</b>를 생성한다. 이 객체는 앱의 <b class="heavy">Life Cycle</b>을 관리한다.
 - <b class="heavy">@UIApplicationMain</b>이 표시된 클래스에서 델리게이트를 인스턴스화 하고 이를 앱의 객체에 할당한다.
-- 앱의 Run Loop을 포함한 기본 이벤트처리 루프를 설정하고 이벤트 처리를 시작합니다.
+- 앱의 Run Loop을 포함한 기본 이벤트처리 루프를 설정하고 이벤트 처리를 시작한다.
 - 앱의 info.plist에 불러올 main nib파일이 제대로 명시되어있으면, 해당 nib파일을 불러온다.
 
 ### 하지만 Xcode 12부터 <b class="bold">@UIApplicationMain</b> 대신 <b class="bold">@main</b> 속성이 쓰이게 된다.
