@@ -12,10 +12,10 @@ tags: iOS, Swift
 <blockquote><b class="inyong">관련된 네트워크 데이터 전송 작업 그룹을 조정하는 개체입니다.</b></blockquote>
 ### <b class="bold">URLSession</b>은 iOS에서 제공하는 HTTP를 이용한 네트워킹을 통해 데이터를 주고 받을 수 있게 도와주는 API를 제공하는 클래스이다.
 
-### <b class="heavy">URLSession</b>은 <b class="heavy">Thread-Safty</b>하기 때문에 어떤 스레드에서든 자유롭게 Session과 Task를 생성할 수 있다.
+### <b class="heavy">URLSession</b>은 <b class="heavy">Thread-Safty</b>하기 때문에 어떤 스레드에서든 자유롭게 <b class="bold">Session</b>과 <b class="bold">Task</b>를 생성할 수 있다.
 
 ### <b class="heavy">URLSession</b>은 <b class="heavy">URLSessionConfiguration</b>을 통해 생성할 수 있다.
-### 이렇게 생성된 <b class="heavy">URLSession</b>을 통해 한 개 이상의 URLSessionTask를 생성할 수 있으며, 이 <b class="heavy">URLSessionTask</b>를 통해 실제로 서버와 통신을 할 수 있다.
+### 이렇게 생성된 <b class="heavy">URLSession</b>을 통해 한 개 이상의 <b class="heavy">URLSessionTask</b>를 생성할 수 있으며, 이 <b class="heavy">URLSessionTask</b>를 통해 실제로 서버와 통신을 할 수 있다.
 
 ## URLSessionConfiguration
 ### <b class="heavy">URLSessionConfiguration</b>은 아래 세가지 타입을 가진다.
