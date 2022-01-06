@@ -6,8 +6,6 @@ tags: iOS, Swift
 
 ## URLSession?
 ### 애플에서는 URLSession을 아래와 같이 설명한다.
-
-<br/>
 <img src="/images/urlsessionImage.png"/>
 <blockquote><b class="inyong">관련된 네트워크 데이터 전송 작업 그룹을 조정하는 개체입니다.</b></blockquote>
 ### <b class="bold">URLSession</b>은 iOS에서 제공하는 HTTP를 이용한 네트워킹을 통해 데이터를 주고 받을 수 있게 도와주는 API를 제공하는 클래스이다.
