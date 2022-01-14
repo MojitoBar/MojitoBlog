@@ -1,5 +1,5 @@
 ---
-date: 2022-01-12 10:48
+date: 2022-01-14 22:48
 description: UIKit에서 UI를 깔끔하게 선언하기 위한 노력
 tags: iOS, Swift
 ---
@@ -102,6 +102,84 @@ class ViewController: UIViewController {
 ## 생각해볼 점
 - 대부분의 값을 커스텀하게 사용할 수 없을까? 예를 들어 현재 코드를 기준으로 RoundedButton(type: .middle) 를 선언하면 가로세로 30의 빨간 Rounded 사각형이 생긴다. 이때 색깔이나 가로세로도 커스텀하게 사용할 수 없을까?
 - 메인에서 사용되는 코드를 보면 SuperView에 추가해주는 코드가 오브젝트마다 따라붙어야한다는 것을 알 수 있다. 이 부분을 더 깔끔하게 해결할 수 없을까?
+
+## 2022/01/14
+### CustomUI에 다양한 옵션을 주거나, SuperView에 CustomUI를 추가하는 코드를 좀 더 깔끔하게 관리하기 위해 <b class="heavy">SwiftUI스럽게(?)</b> 바꿔보았다.
+
+```swift
+// 커스텀 라벨
+class CustomLabel: UILabel {
+    init() {
+        super.init(frame: CGRect.zero)
+    }
+    
+    convenience init(parent: UIView) {
+        self.init()
+        
+        parent.addSubview(self)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)!
+    }
+    
+    func setFont(name: String, size: CGFloat) -> CustomLabel {
+        self.font = UIFont(name: name, size: size)
+        
+        return self
+    }
+    
+    func setColor(color: UIColor) -> CustomLabel {
+        self.textColor = color
+        
+        return self
+    }
+    
+    func setText(text: String) -> CustomLabel {
+        self.text = text
+        
+        return self
+    }
+    
+    func setupConstraints(top: CGFloat, leading: CGFloat) -> CustomLabel {
+        // 제약사항에 관한 세팅들
+        self.snp.makeConstraints { make in
+            make.top.equalTo(top)
+            make.leading.equalTo(leading)
+        }
+        return self
+    }
+    
+    func setCenterXConstraint(top: CGFloat, center: UIView) -> CustomLabel {
+        self.snp.makeConstraints { make in
+            make.centerX.equalTo(center)
+            make.top.equalTo(top)
+        }
+        return self
+    }
+    
+    func end() { }
+}
+``` 
+
+### 현재는 많이 엉성하지만 어느정도 내가 원했던 스타일에 접근하고 있는 것 같아 기쁘다.
+### 위와 같이 CustomUI를 구현하면 ViewController에서 나름 편안하게 UI를 구현할 수 있다.
+
+```swift
+CustomLabel(parent: mapView)
+    .setFont(name: "NotoSansKR-Bold", size: 18)
+    .setColor(color: UIColor(hex: "999999"))
+    .setCenterXConstraint(top: 22 + UIScreenSize.shared.topPadding, center: mapView)
+    .setText(text: "인계동")
+    .end()
+```
+### 이런식으로 마치 SwiftUI와 비스무리한 무엇인가를 쓸 수 있게 되었다!
+### <b class="bold">.end()</b>의 경우엔 리턴값을 사용하지 않는다는 경고를 없애기 위해 임시방편으로 사용하고 있기 때문에 더 좋은 방법을 찾아야한다.
+### 레이아웃 제약조건을 주는 부분도 마음에 들지 않는다... 수정이 필요하다.
+### 추가적으로 <a class="juso" href="https://peppo.tistory.com/11">[iOS] UIKit 에서 실시간 Preview 보는 방법</a> 을 이용하면 UIKit에서도 <b class="heavy">프리뷰</b>를 활용할 수 있다. (Peppo님, 감사합니다.)
+### 이런 고민을 쭉 하며 자료를 찾다 아주 기가막힌 영상을 하나 발견하게 되었다. <a class="juso" href="https://www.youtube.com/watch?v=eGerQUlXeyg">IB 없이 개발하기</a>
+### <b class="heavy">Let's Swift 2019 6번째 세션</b>으로 <b class="heavy">김남현</b>님이 발표해주신 내용인데, 내가 원하는 해결책이 거의 정확하게 담겨있는 영상이다. 타다에서 2년전에 고민했고 해결한 부분이라는 점에 놀랐고, 이런 문제를 같이 고민하고 공유할 개발자들이 있는 회사를 빨리 가고싶다는 생각이 들었다...
+### 해당 영상을 참고해 1차 완성본을 만드는 것이 목표이다.
 
 <br/>
 <br/>
