@@ -181,6 +181,21 @@ CustomLabel(parent: mapView)
 ### <b class="heavy">Let's Swift 2019 6번째 세션</b>으로 <b class="heavy">김남현</b>님이 발표해주신 내용인데, 내가 원하는 해결책이 거의 정확하게 담겨있는 영상이다. 타다에서 2년전에 고민했고 해결한 부분이라는 점에 놀랐고, 이런 문제를 같이 고민하고 공유할 개발자들이 있는 회사를 빨리 가고싶다는 생각이 들었다...
 ### 해당 영상을 참고해 1차 완성본을 만드는 것이 목표이다.
 
+## 2022/01/16
+### 이번에 2가지 문제점을 해결했다.
+### 먼저 리턴값을 사용하지 않는다는 경고를 없애기 위해 모든 함수에 <b class="bold">@discardableResult</b> 키워드를 사용했고, <b class="bold">@escaping</b> 클로저로 <b class="heavy">constraint</b> 를 적용했다!
+
+```swift
+@discardableResult public func makeConstraints(_ maker: @escaping (ConstraintMaker) -> Void) -> CustomButton {
+    self.snp.makeConstraints { maker($0) }
+    return self
+}
+```
+
+### 이런식으로 사용하게 되면 경고문구도 안뜨고, 원하는 제약조건을 마음대로 줄 수 있다
+### 1차적으로 완성된 것 같아서 이런식으로 일단 사용할 것 같은데 나중에 각종 이벤트나 애니메이션을 줘야할 때 부작용이 있을 것 같다.
+### 그때 그때 문제가 있을 때 마다 리펙토링하며 수정해나갈 예정이다.
+
 <br/>
 <br/>
 ## 참고자료
