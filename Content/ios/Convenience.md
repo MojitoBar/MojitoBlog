@@ -6,8 +6,8 @@ tags: iOS, Swift
 
 ## init과 Convenience init의 차이
 ### Swift에서 초기화는 2가지 종류가 있다.
-### 지정 초기화인 init, (Designated init이라고도 한다.)와 Convenience init이다.
-### init은 클래스의 모든 프로퍼티가 초기화 되어야 한다는 특성이 있다.
+### 지정 초기화인 <b class="bold">init</b>, (Designated init이라고도 한다.)와 <b class="bold">Convenience init</b>이다.
+### <b class="heavy">init</b>은 클래스의 모든 프로퍼티가 초기화 되어야 한다는 특성이 있다.
 
 ```swift
 class Student {
@@ -29,7 +29,7 @@ class Student {
 <br/>
 <br/>
 
-### 반면에 Convenience init은 편의 초기화이다.
+### 반면에 <b class="heavy">Convenience init</b>은 편의 초기화이다.
 ### 바로 예시 코드를 보며 특성을 알아보자.
 
 ```swift
@@ -50,8 +50,8 @@ class Student {
 }
 ```
 
-### Convenience init은 보조 초기화라고도 불리는데, 말 그대로 원래 init을 보조해주는 역할을 한다.
-### Designated init은 모든 프로퍼티가 초기화 되어야 하지만 Convenience init은 내부에 Designated init을 포함해야만 하기 때문에 프로퍼티의 일부만 받는 위와 같은 예제가 가능해진다.
+### <b class="heavy">Convenience init</b>은 보조 초기화라고도 불리는데, 말 그대로 원래 <b class="heavy">init</b>을 보조해주는 역할을 한다.
+### <b class="heavy">Designated init</b>은 모든 프로퍼티가 초기화 되어야 하지만 <b class="heavy">Convenience init</b>은 내부에 <b class="heavy">Designated init</b>을 포함해야만 하기 때문에 프로퍼티의 일부만 받는 위와 같은 예제가 가능해진다.
  
 <br/>
 
